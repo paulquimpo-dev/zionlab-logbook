@@ -7,11 +7,22 @@ import { LogbookDashboard } from '../../components/watermelon/bionis-dashboard/l
 const root = document.getElementById('logbook-admin-root')
 const dataElement = document.getElementById('logbook-dashboard-data')
 
-if (root && dataElement) {
-  const data = JSON.parse(dataElement.textContent || '{}')
+if (root) {
+  const pageTitle = root.dataset.pageTitle || 'Overview'
+  const contentElement = document.getElementById('logbook-admin-content')
+  const pageContent = contentElement?.innerHTML || ''
+  if (dataElement) {
+    const data = JSON.parse(dataElement.textContent || '{}')
+    createRoot(root).render(
+      <DashboardNavigationProvider>
+        <DashboardLayout pageTitle="Overview"><LogbookDashboard data={data} /></DashboardLayout>
+      </DashboardNavigationProvider>,
+    )
+  } else {
   createRoot(root).render(
     <DashboardNavigationProvider>
-      <DashboardLayout><LogbookDashboard data={data} /></DashboardLayout>
+      <DashboardLayout pageTitle={pageTitle}><div className="admin-page-content" dangerouslySetInnerHTML={{ __html: pageContent }} /></DashboardLayout>
     </DashboardNavigationProvider>,
   )
+  }
 }

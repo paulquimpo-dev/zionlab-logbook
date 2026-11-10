@@ -15,6 +15,7 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function(){
  Route::post('/sessions/{session}/resolve',[AdminController::class,'resolve'])->name('resolve');
  Route::get('/computers',[AdminController::class,'computers'])->name('computers');
  Route::post('/computers',[AdminController::class,'addComputer'])->name('computers.add');
+ Route::patch('/computers/{computer}',[AdminController::class,'renameComputer'])->name('computers.rename');
  Route::post('/computers/{computer}/rotate',[AdminController::class,'rotateComputer'])->name('computers.rotate');
  Route::post('/computers/{computer}/toggle',[AdminController::class,'toggleComputer'])->name('computers.toggle');
  Route::delete('/computers/{computer}',[AdminController::class,'deleteComputer'])->name('computers.delete');

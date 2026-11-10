@@ -1,1 +1,14 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>Administrator login</title>@vite('resources/css/app.css')</head><body><main class="wrap narrow"><section class="hero"><div class="eyebrow"><img class="login-logo" src="{{ asset('/images/LZDS-LOGO.png') }}" alt="LZDS logo"><br>LZDS ADMINISTRATION</div><h1>Administrator login</h1></section><section class="card"><form method="post" action="{{ route('admin.authenticate') }}">@csrf<label>Email<input type="email" name="email" required autofocus></label><label>Password<input type="password" name="password" required></label>@error('email')<p class="error">{{ $message }}</p>@enderror<button class="button">Sign in</button></form><p><a href="/">Return to student logbook</a></p></section></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="#123858">
+    <title>Administrator sign in · LZDS Computer Laboratory</title>
+    @vite('resources/js/login.jsx')
+</head>
+<body>
+    <div id="auth-01-root"></div>
+    <script id="auth-01-props" type="application/json">@json(['csrfToken'=>csrf_token(),'emailValue'=>old('email'),'error'=>$errors->first('email')])</script>
+</body>
+</html>

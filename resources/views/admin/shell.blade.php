@@ -1,1 +1,19 @@
-<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>{{ $title }} · LZDS Logbook</title>@vite('resources/css/app.css')</head><body><header class="top"><div class="brand"><img class="brand-logo" src="{{ asset('/images/LZDS-LOGO.png') }}" alt="LZDS logo"><span>LOGBOOK ADMIN</span></div><nav><a href="{{ route('admin.dashboard') }}">Dashboard</a><a href="{{ route('admin.sessions') }}">Sessions</a><a href="{{ route('admin.computers') }}">Computers</a><a href="{{ route('admin.settings') }}">Dropdowns</a><form method="post" action="{{ route('admin.logout') }}">@csrf<button class="linkbtn">Sign out</button></form></nav></header><main class="wrap"><h1>{{ $title }}</h1>@if($errors->any())<div class="notice bad">{{ $errors->first() }}</div>@endif @if(session('success'))<div class="notice good">{{ session('success') }}</div>@endif @if(session('enrollment_url'))<div class="notice good">Created {{ session('created_pc') }}. Open the one-time setup address on that computer now and save it as the Edge home page:<br><input readonly value="{{ session('enrollment_url') }}" onclick="this.select()"><strong> Copy this link now. It will not be shown again.</strong></div>@endif
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>{{ $title }} · LZDS Computer Laboratory</title>
+    @vite(['resources/css/app.css','resources/js/admin.jsx'])
+</head>
+<body>
+    <div id="logbook-admin-root" data-page-title="{{ $title }}">
+        <div id="logbook-admin-content">
+            @if($errors->any())<div class="notice bad" role="alert">{{ $errors->first() }}</div>@endif
+            @if(session('success'))<div class="notice good" role="status">{{ session('success') }}</div>@endif
+            @if(session('enrollment_url'))<div class="notice good enrollment-notice" role="status"><strong>{{ session('created_pc') }} is registered.</strong><p>Open this one-time setup address on that computer now, then save it as the Edge home page.</p><div class="copy-row"><input readonly value="{{ session('enrollment_url') }}" onclick="this.select()"><strong>Copy this link now. It will not be shown again.</strong></div></div>@endif
+        </div>
+    </div>
+</body>
+</html>
