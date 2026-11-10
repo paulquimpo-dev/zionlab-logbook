@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "module": "ESNext",
+    "moduleResolution": "Bundler",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
+    "paths": { "@/*": ["resources/js/*"] },
+    "allowJs": true,
+    "skipLibCheck": true,
+    "noEmit": true
+  },
+  "include": ["resources/js/**/*.ts", "resources/js/**/*.tsx", "resources/js/**/*.js", "resources/js/**/*.jsx"]
+}
